@@ -1,0 +1,33 @@
+MODULE main
+VAR
+  pc0   : {idle, set_turn, waiting, cs};
+  pc1   : {idle, set_turn, waiting, cs};
+  flag0 : boolean;
+  flag1 : boolean;
+  turn  : 0..1;
+
+INIT
+  pc0 = idle & pc1 = idle & !flag0 & !flag1 & turn = 0
+
+DEFINE
+  P0_in_CS  := (pc0 = cs);
+  P1_in_CS  := (pc1 = cs);
+  turn_is_1 := (turn = 1);
+
+TRANS
+
+    (pc0 = idle & next(pc0) = set_turn & next(flag0) & next(pc1) = pc1 & next(flag1) = flag1 & next(turn) = turn)
+
+  | (pc0 = set_turn & next(pc0) = waiting & next(turn) = 1 & next(flag0) = flag0 & next(pc1) = pc1 & next(flag1) = flag1)
+
+  | (pc0 = waiting & !(flag1 & turn = 1) & next(pc0) = cs & next(flag0) = flag0 & next(pc1) = pc1 & next(flag1) = flag1 & next(turn) = turn)
+
+  | (pc0 = cs & next(pc0) = idle & !next(flag0) & next(pc1) = pc1 & next(flag1) = flag1 & next(turn) = turn)
+
+  | (pc1 = idle & next(pc1) = set_turn & next(flag1) & next(pc0) = pc0 & next(flag0) = flag0 & next(turn) = turn)
+
+  | (pc1 = set_turn & next(pc1) = waiting & next(turn) = 0 & next(flag1) = flag1 & next(pc0) = pc0 & next(flag0) = flag0)
+
+  | (pc1 = waiting & !(flag0 & turn = 0) & next(pc1) = cs & next(flag1) = flag1 & next(pc0) = pc0 & next(flag0) = flag0 & next(turn) = turn)
+
+  | (pc1 = cs & next(pc1) = idle & !next(flag1) & next(pc0) = pc0 & next(flag0) = flag0 & next(turn) = turn)

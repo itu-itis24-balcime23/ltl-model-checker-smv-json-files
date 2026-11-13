@@ -1,0 +1,40 @@
+MODULE main
+VAR
+  pos     : 0..4;
+  dir     : {up, down, stat};
+  door    : {closed, opening, open, closing};
+  req     : {no_req, r1, r2, r3};
+  stalled : boolean;
+
+INIT
+  pos = 0 & dir = stat & door = closed & req = no_req & !stalled
+
+DEFINE
+  tgt        := case req = r1 : 0; req = r2 : 2; req = r3 : 4; TRUE : 0; esac;
+  idle       := !stalled & dir = stat & door = closed & (pos mod 2) = 0;
+  moving     := (dir != stat);
+  doors_open := (door = open);
+
+TRANS
+
+    (stalled & next(stalled) & next(pos) = pos & next(dir) = dir & next(door) = door & next(req) = req)
+
+  | (idle & req = no_req & next(req) != no_req & next(pos) = pos & next(dir) = dir & next(door) = door & !next(stalled))
+
+  | (idle & req != no_req & tgt = pos & next(door) = opening & next(pos) = pos & next(dir) = dir & next(req) = req & !next(stalled))
+
+  | (idle & req != no_req & tgt > pos & next(pos) = pos + 1 & next(dir) = up & next(door) = door & next(req) = req & !next(stalled))
+
+  | (idle & req != no_req & tgt < pos & next(pos) = pos - 1 & next(dir) = down & next(door) = door & next(req) = req & !next(stalled))
+
+  | (!stalled & dir = up & next(pos) = pos + 1 & next(dir) = stat & next(door) = door & next(req) = req & !next(stalled))
+
+  | (!stalled & dir = down & next(pos) = pos - 1 & next(dir) = stat & next(door) = door & next(req) = req & !next(stalled))
+
+  | (!stalled & moving & next(stalled) & next(pos) = pos & next(dir) = stat & next(door) = door & next(req) = req)
+
+  | (!stalled & dir = stat & door = opening & next(door) = open & next(req) = no_req & next(pos) = pos & next(dir) = dir & !next(stalled))
+
+  | (!stalled & dir = stat & door = open & next(door) = closing & next(req) = req & next(pos) = pos & next(dir) = dir & !next(stalled))
+
+  | (!stalled & dir = stat & door = closing & next(door) = closed & next(req) = req & next(pos) = pos & next(dir) = dir & !next(stalled))

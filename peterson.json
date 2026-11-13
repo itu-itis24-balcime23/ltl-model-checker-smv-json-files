@@ -1,0 +1,211 @@
+{
+  "atomic_propositions": [
+    "P0_in_CS",
+    "P1_in_CS",
+    "flag0",
+    "flag1",
+    "turn_is_1"
+  ],
+  "initial_states": [
+    "idle.idle.f00.t0"
+  ],
+  "states": {
+    "idle.idle.f00.t0": {
+      "labels": [],
+      "transitions": [
+        "set_turn.idle.f10.t0",
+        "idle.set_turn.f01.t0"
+      ]
+    },
+    "set_turn.idle.f10.t0": {
+      "labels": [
+        "flag0"
+      ],
+      "transitions": [
+        "waiting.idle.f10.t1",
+        "set_turn.set_turn.f11.t0"
+      ]
+    },
+    "idle.set_turn.f01.t0": {
+      "labels": [
+        "flag1"
+      ],
+      "transitions": [
+        "set_turn.set_turn.f11.t0",
+        "idle.waiting.f01.t0"
+      ]
+    },
+    "waiting.idle.f10.t1": {
+      "labels": [
+        "flag0",
+        "turn_is_1"
+      ],
+      "transitions": [
+        "cs.idle.f10.t1",
+        "waiting.set_turn.f11.t1"
+      ]
+    },
+    "set_turn.set_turn.f11.t0": {
+      "labels": [
+        "flag0",
+        "flag1"
+      ],
+      "transitions": [
+        "waiting.set_turn.f11.t1",
+        "set_turn.waiting.f11.t0"
+      ]
+    },
+    "idle.waiting.f01.t0": {
+      "labels": [
+        "flag1"
+      ],
+      "transitions": [
+        "set_turn.waiting.f11.t0",
+        "idle.cs.f01.t0"
+      ]
+    },
+    "cs.idle.f10.t1": {
+      "labels": [
+        "P0_in_CS",
+        "flag0",
+        "turn_is_1"
+      ],
+      "transitions": [
+        "idle.idle.f00.t1",
+        "cs.set_turn.f11.t1"
+      ]
+    },
+    "waiting.set_turn.f11.t1": {
+      "labels": [
+        "flag0",
+        "flag1",
+        "turn_is_1"
+      ],
+      "transitions": [
+        "waiting.waiting.f11.t0"
+      ]
+    },
+    "set_turn.waiting.f11.t0": {
+      "labels": [
+        "flag0",
+        "flag1"
+      ],
+      "transitions": [
+        "waiting.waiting.f11.t1"
+      ]
+    },
+    "idle.cs.f01.t0": {
+      "labels": [
+        "P1_in_CS",
+        "flag1"
+      ],
+      "transitions": [
+        "set_turn.cs.f11.t0",
+        "idle.idle.f00.t0"
+      ]
+    },
+    "idle.idle.f00.t1": {
+      "labels": [
+        "turn_is_1"
+      ],
+      "transitions": [
+        "set_turn.idle.f10.t1",
+        "idle.set_turn.f01.t1"
+      ]
+    },
+    "cs.set_turn.f11.t1": {
+      "labels": [
+        "P0_in_CS",
+        "flag0",
+        "flag1",
+        "turn_is_1"
+      ],
+      "transitions": [
+        "idle.set_turn.f01.t1",
+        "cs.waiting.f11.t0"
+      ]
+    },
+    "waiting.waiting.f11.t0": {
+      "labels": [
+        "flag0",
+        "flag1"
+      ],
+      "transitions": [
+        "cs.waiting.f11.t0"
+      ]
+    },
+    "waiting.waiting.f11.t1": {
+      "labels": [
+        "flag0",
+        "flag1",
+        "turn_is_1"
+      ],
+      "transitions": [
+        "waiting.cs.f11.t1"
+      ]
+    },
+    "set_turn.cs.f11.t0": {
+      "labels": [
+        "P1_in_CS",
+        "flag0",
+        "flag1"
+      ],
+      "transitions": [
+        "waiting.cs.f11.t1",
+        "set_turn.idle.f10.t0"
+      ]
+    },
+    "set_turn.idle.f10.t1": {
+      "labels": [
+        "flag0",
+        "turn_is_1"
+      ],
+      "transitions": [
+        "waiting.idle.f10.t1",
+        "set_turn.set_turn.f11.t1"
+      ]
+    },
+    "idle.set_turn.f01.t1": {
+      "labels": [
+        "flag1",
+        "turn_is_1"
+      ],
+      "transitions": [
+        "set_turn.set_turn.f11.t1",
+        "idle.waiting.f01.t0"
+      ]
+    },
+    "cs.waiting.f11.t0": {
+      "labels": [
+        "P0_in_CS",
+        "flag0",
+        "flag1"
+      ],
+      "transitions": [
+        "idle.waiting.f01.t0"
+      ]
+    },
+    "waiting.cs.f11.t1": {
+      "labels": [
+        "P1_in_CS",
+        "flag0",
+        "flag1",
+        "turn_is_1"
+      ],
+      "transitions": [
+        "waiting.idle.f10.t1"
+      ]
+    },
+    "set_turn.set_turn.f11.t1": {
+      "labels": [
+        "flag0",
+        "flag1",
+        "turn_is_1"
+      ],
+      "transitions": [
+        "waiting.set_turn.f11.t1",
+        "set_turn.waiting.f11.t0"
+      ]
+    }
+  }
+}

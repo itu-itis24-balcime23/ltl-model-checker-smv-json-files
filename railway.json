@@ -1,0 +1,162 @@
+{
+  "atomic_propositions": [
+    "train_in_crossing",
+    "gate_is_down",
+    "unsafe_state"
+  ],
+  "initial_states": [
+    "far.open.idle"
+  ],
+  "states": {
+    "far.open.idle": {
+      "labels": [],
+      "transitions": [
+        "far.open.idle",
+        "approaching.open.idle"
+      ]
+    },
+    "approaching.open.idle": {
+      "labels": [],
+      "transitions": [
+        "approaching.open.idle",
+        "approaching.open.closing_req",
+        "in_crossing.open.idle",
+        "in_crossing.open.closing_req"
+      ]
+    },
+    "approaching.open.closing_req": {
+      "labels": [],
+      "transitions": [
+        "approaching.open.closing_req",
+        "approaching.lowering.closing_req",
+        "in_crossing.open.closing_req",
+        "in_crossing.lowering.closing_req"
+      ]
+    },
+    "in_crossing.open.idle": {
+      "labels": [
+        "train_in_crossing",
+        "unsafe_state"
+      ],
+      "transitions": [
+        "in_crossing.open.idle",
+        "passed.open.idle"
+      ]
+    },
+    "in_crossing.open.closing_req": {
+      "labels": [
+        "train_in_crossing",
+        "unsafe_state"
+      ],
+      "transitions": [
+        "in_crossing.open.closing_req",
+        "in_crossing.lowering.closing_req",
+        "passed.open.closing_req",
+        "passed.lowering.closing_req"
+      ]
+    },
+    "approaching.lowering.closing_req": {
+      "labels": [],
+      "transitions": [
+        "approaching.lowering.closing_req",
+        "approaching.closed.closing_req",
+        "in_crossing.lowering.closing_req",
+        "in_crossing.closed.closing_req"
+      ]
+    },
+    "in_crossing.lowering.closing_req": {
+      "labels": [
+        "train_in_crossing",
+        "unsafe_state"
+      ],
+      "transitions": [
+        "in_crossing.lowering.closing_req",
+        "in_crossing.closed.closing_req",
+        "passed.lowering.closing_req",
+        "passed.closed.closing_req"
+      ]
+    },
+    "passed.open.idle": {
+      "labels": [],
+      "transitions": [
+        "passed.open.idle"
+      ]
+    },
+    "passed.open.closing_req": {
+      "labels": [],
+      "transitions": [
+        "passed.open.closing_req",
+        "passed.open.opening_req",
+        "passed.lowering.closing_req",
+        "passed.lowering.opening_req"
+      ]
+    },
+    "passed.lowering.closing_req": {
+      "labels": [],
+      "transitions": [
+        "passed.lowering.closing_req",
+        "passed.lowering.opening_req",
+        "passed.closed.closing_req",
+        "passed.closed.opening_req"
+      ]
+    },
+    "approaching.closed.closing_req": {
+      "labels": [
+        "gate_is_down"
+      ],
+      "transitions": [
+        "approaching.closed.closing_req",
+        "in_crossing.closed.closing_req"
+      ]
+    },
+    "in_crossing.closed.closing_req": {
+      "labels": [
+        "train_in_crossing",
+        "gate_is_down"
+      ],
+      "transitions": [
+        "in_crossing.closed.closing_req",
+        "passed.closed.closing_req"
+      ]
+    },
+    "passed.closed.closing_req": {
+      "labels": [
+        "gate_is_down"
+      ],
+      "transitions": [
+        "passed.closed.closing_req",
+        "passed.closed.opening_req"
+      ]
+    },
+    "passed.open.opening_req": {
+      "labels": [],
+      "transitions": [
+        "passed.open.opening_req",
+        "passed.open.idle"
+      ]
+    },
+    "passed.lowering.opening_req": {
+      "labels": [],
+      "transitions": [
+        "passed.lowering.opening_req",
+        "passed.raising.opening_req"
+      ]
+    },
+    "passed.closed.opening_req": {
+      "labels": [
+        "gate_is_down"
+      ],
+      "transitions": [
+        "passed.closed.opening_req",
+        "passed.raising.opening_req"
+      ]
+    },
+    "passed.raising.opening_req": {
+      "labels": [],
+      "transitions": [
+        "passed.raising.opening_req",
+        "passed.open.opening_req"
+      ]
+    }
+  }
+}

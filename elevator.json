@@ -1,0 +1,252 @@
+{
+  "atomic_propositions": [
+    "moving",
+    "doors_open",
+    "stalled"
+  ],
+  "initial_states": [
+    "F1.stat.closed.noreq"
+  ],
+  "states": {
+    "F1.stat.closed.noreq": {
+      "labels": [],
+      "transitions": [
+        "F1.stat.closed.req1",
+        "F1.stat.closed.req2",
+        "F1.stat.closed.req3"
+      ]
+    },
+    "F1.stat.closed.req1": {
+      "labels": [],
+      "transitions": [
+        "F1.stat.opening.req1"
+      ]
+    },
+    "F1.stat.closed.req2": {
+      "labels": [],
+      "transitions": [
+        "B12.up.closed.req2"
+      ]
+    },
+    "F1.stat.closed.req3": {
+      "labels": [],
+      "transitions": [
+        "B12.up.closed.req3"
+      ]
+    },
+    "F1.stat.opening.req1": {
+      "labels": [],
+      "transitions": [
+        "F1.stat.open.noreq"
+      ]
+    },
+    "B12.up.closed.req2": {
+      "labels": [
+        "moving"
+      ],
+      "transitions": [
+        "F2.stat.closed.req2",
+        "B12.stat.closed.req2.STALLED"
+      ]
+    },
+    "B12.up.closed.req3": {
+      "labels": [
+        "moving"
+      ],
+      "transitions": [
+        "F2.stat.closed.req3",
+        "B12.stat.closed.req3.STALLED"
+      ]
+    },
+    "F1.stat.open.noreq": {
+      "labels": [
+        "doors_open"
+      ],
+      "transitions": [
+        "F1.stat.closing.noreq"
+      ]
+    },
+    "F2.stat.closed.req2": {
+      "labels": [],
+      "transitions": [
+        "F2.stat.opening.req2"
+      ]
+    },
+    "B12.stat.closed.req2.STALLED": {
+      "labels": [
+        "stalled"
+      ],
+      "transitions": [
+        "B12.stat.closed.req2.STALLED"
+      ]
+    },
+    "F2.stat.closed.req3": {
+      "labels": [],
+      "transitions": [
+        "B23.up.closed.req3"
+      ]
+    },
+    "B12.stat.closed.req3.STALLED": {
+      "labels": [
+        "stalled"
+      ],
+      "transitions": [
+        "B12.stat.closed.req3.STALLED"
+      ]
+    },
+    "F1.stat.closing.noreq": {
+      "labels": [],
+      "transitions": [
+        "F1.stat.closed.noreq"
+      ]
+    },
+    "F2.stat.opening.req2": {
+      "labels": [],
+      "transitions": [
+        "F2.stat.open.noreq"
+      ]
+    },
+    "B23.up.closed.req3": {
+      "labels": [
+        "moving"
+      ],
+      "transitions": [
+        "F3.stat.closed.req3",
+        "B23.stat.closed.req3.STALLED"
+      ]
+    },
+    "F2.stat.open.noreq": {
+      "labels": [
+        "doors_open"
+      ],
+      "transitions": [
+        "F2.stat.closing.noreq"
+      ]
+    },
+    "F3.stat.closed.req3": {
+      "labels": [],
+      "transitions": [
+        "F3.stat.opening.req3"
+      ]
+    },
+    "B23.stat.closed.req3.STALLED": {
+      "labels": [
+        "stalled"
+      ],
+      "transitions": [
+        "B23.stat.closed.req3.STALLED"
+      ]
+    },
+    "F2.stat.closing.noreq": {
+      "labels": [],
+      "transitions": [
+        "F2.stat.closed.noreq"
+      ]
+    },
+    "F3.stat.opening.req3": {
+      "labels": [],
+      "transitions": [
+        "F3.stat.open.noreq"
+      ]
+    },
+    "F2.stat.closed.noreq": {
+      "labels": [],
+      "transitions": [
+        "F2.stat.closed.req1",
+        "F2.stat.closed.req2",
+        "F2.stat.closed.req3"
+      ]
+    },
+    "F3.stat.open.noreq": {
+      "labels": [
+        "doors_open"
+      ],
+      "transitions": [
+        "F3.stat.closing.noreq"
+      ]
+    },
+    "F2.stat.closed.req1": {
+      "labels": [],
+      "transitions": [
+        "B12.down.closed.req1"
+      ]
+    },
+    "F3.stat.closing.noreq": {
+      "labels": [],
+      "transitions": [
+        "F3.stat.closed.noreq"
+      ]
+    },
+    "B12.down.closed.req1": {
+      "labels": [
+        "moving"
+      ],
+      "transitions": [
+        "F1.stat.closed.req1",
+        "B12.stat.closed.req1.STALLED"
+      ]
+    },
+    "F3.stat.closed.noreq": {
+      "labels": [],
+      "transitions": [
+        "F3.stat.closed.req1",
+        "F3.stat.closed.req2",
+        "F3.stat.closed.req3"
+      ]
+    },
+    "B12.stat.closed.req1.STALLED": {
+      "labels": [
+        "stalled"
+      ],
+      "transitions": [
+        "B12.stat.closed.req1.STALLED"
+      ]
+    },
+    "F3.stat.closed.req1": {
+      "labels": [],
+      "transitions": [
+        "B23.down.closed.req1"
+      ]
+    },
+    "F3.stat.closed.req2": {
+      "labels": [],
+      "transitions": [
+        "B23.down.closed.req2"
+      ]
+    },
+    "B23.down.closed.req1": {
+      "labels": [
+        "moving"
+      ],
+      "transitions": [
+        "F2.stat.closed.req1",
+        "B23.stat.closed.req1.STALLED"
+      ]
+    },
+    "B23.down.closed.req2": {
+      "labels": [
+        "moving"
+      ],
+      "transitions": [
+        "F2.stat.closed.req2",
+        "B23.stat.closed.req2.STALLED"
+      ]
+    },
+    "B23.stat.closed.req1.STALLED": {
+      "labels": [
+        "stalled"
+      ],
+      "transitions": [
+        "B23.stat.closed.req1.STALLED"
+      ]
+    },
+    "B23.stat.closed.req2.STALLED": {
+      "labels": [
+        "stalled"
+      ],
+      "transitions": [
+        "B23.stat.closed.req2.STALLED"
+      ]
+    }
+  }
+}

@@ -1,0 +1,174 @@
+{
+  "atomic_propositions": [
+    "packet_lost",
+    "ack_received",
+    "bit_error"
+  ],
+  "initial_states": [
+    "send_s0_r0"
+  ],
+  "states": {
+    "send_s0_r0": {
+      "labels": [],
+      "transitions": [
+        "data_tx_s0_r0"
+      ]
+    },
+    "data_tx_s0_r0": {
+      "labels": [],
+      "transitions": [
+        "data_lost_s0_r0",
+        "data_corrupt_s0_r0",
+        "ack_tx_s0_r1"
+      ]
+    },
+    "data_lost_s0_r0": {
+      "labels": [
+        "packet_lost"
+      ],
+      "transitions": [
+        "send_s0_r0"
+      ]
+    },
+    "data_corrupt_s0_r0": {
+      "labels": [
+        "bit_error"
+      ],
+      "transitions": [
+        "send_s0_r0"
+      ]
+    },
+    "ack_tx_s0_r1": {
+      "labels": [],
+      "transitions": [
+        "ack_lost_s0_r1",
+        "ack_ok_s0_r1"
+      ]
+    },
+    "ack_lost_s0_r1": {
+      "labels": [],
+      "transitions": [
+        "send_s0_r1"
+      ]
+    },
+    "ack_ok_s0_r1": {
+      "labels": [
+        "ack_received"
+      ],
+      "transitions": [
+        "send_s1_r1"
+      ]
+    },
+    "send_s0_r1": {
+      "labels": [],
+      "transitions": [
+        "data_tx_s0_r1"
+      ]
+    },
+    "send_s1_r1": {
+      "labels": [],
+      "transitions": [
+        "data_tx_s1_r1"
+      ]
+    },
+    "data_tx_s0_r1": {
+      "labels": [],
+      "transitions": [
+        "data_lost_s0_r1",
+        "data_corrupt_s0_r1",
+        "ack_tx_s0_r1"
+      ]
+    },
+    "data_tx_s1_r1": {
+      "labels": [],
+      "transitions": [
+        "data_lost_s1_r1",
+        "data_corrupt_s1_r1",
+        "ack_tx_s1_r0"
+      ]
+    },
+    "data_lost_s0_r1": {
+      "labels": [
+        "packet_lost"
+      ],
+      "transitions": [
+        "send_s0_r1"
+      ]
+    },
+    "data_corrupt_s0_r1": {
+      "labels": [
+        "bit_error"
+      ],
+      "transitions": [
+        "send_s0_r1"
+      ]
+    },
+    "data_lost_s1_r1": {
+      "labels": [
+        "packet_lost"
+      ],
+      "transitions": [
+        "send_s1_r1"
+      ]
+    },
+    "data_corrupt_s1_r1": {
+      "labels": [
+        "bit_error"
+      ],
+      "transitions": [
+        "send_s1_r1"
+      ]
+    },
+    "ack_tx_s1_r0": {
+      "labels": [],
+      "transitions": [
+        "ack_lost_s1_r0",
+        "ack_ok_s1_r0"
+      ]
+    },
+    "ack_lost_s1_r0": {
+      "labels": [],
+      "transitions": [
+        "send_s1_r0"
+      ]
+    },
+    "ack_ok_s1_r0": {
+      "labels": [
+        "ack_received"
+      ],
+      "transitions": [
+        "send_s0_r0"
+      ]
+    },
+    "send_s1_r0": {
+      "labels": [],
+      "transitions": [
+        "data_tx_s1_r0"
+      ]
+    },
+    "data_tx_s1_r0": {
+      "labels": [],
+      "transitions": [
+        "data_lost_s1_r0",
+        "data_corrupt_s1_r0",
+        "ack_tx_s1_r0"
+      ]
+    },
+    "data_lost_s1_r0": {
+      "labels": [
+        "packet_lost"
+      ],
+      "transitions": [
+        "send_s1_r0"
+      ]
+    },
+    "data_corrupt_s1_r0": {
+      "labels": [
+        "bit_error"
+      ],
+      "transitions": [
+        "send_s1_r0"
+      ]
+    }
+  }
+}

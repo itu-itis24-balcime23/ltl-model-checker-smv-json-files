@@ -1,0 +1,36 @@
+MODULE main
+VAR
+  p0 : {thinking, holding_left, eating};
+  p1 : {thinking, holding_left, eating};
+  p2 : {thinking, holding_left, eating};
+
+INIT
+  p0 = thinking & p1 = thinking & p2 = thinking
+
+DEFINE
+  P0_eating := (p0 = eating);
+  P1_eating := (p1 = eating);
+  P2_eating := (p2 = eating);
+  deadlock  := (p0 = holding_left & p1 = holding_left & p2 = holding_left);
+
+TRANS
+
+    (p0 = thinking & p2 != eating & next(p0) = holding_left & next(p1) = p1 & next(p2) = p2)
+
+  | (p0 = holding_left & p1 = thinking & next(p0) = eating & next(p1) = p1 & next(p2) = p2)
+
+  | (p0 = eating & next(p0) = thinking & next(p1) = p1 & next(p2) = p2)
+
+  | (p1 = thinking & p0 != eating & next(p1) = holding_left & next(p0) = p0 & next(p2) = p2)
+
+  | (p1 = holding_left & p2 = thinking & next(p1) = eating & next(p0) = p0 & next(p2) = p2)
+
+  | (p1 = eating & next(p1) = thinking & next(p0) = p0 & next(p2) = p2)
+
+  | (p2 = thinking & p1 != eating & next(p2) = holding_left & next(p0) = p0 & next(p1) = p1)
+
+  | (p2 = holding_left & p0 = thinking & next(p2) = eating & next(p0) = p0 & next(p1) = p1)
+
+  | (p2 = eating & next(p2) = thinking & next(p0) = p0 & next(p1) = p1)
+
+  | (deadlock & next(p0) = p0 & next(p1) = p1 & next(p2) = p2)

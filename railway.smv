@@ -1,0 +1,38 @@
+MODULE main
+VAR
+  train : {far, approaching, in_crossing, passed};
+  gate  : {open, lowering, closed, raising};
+  ctrl  : {idle, closing_req, opening_req};
+
+ASSIGN
+  init(train) := far;
+  init(gate)  := open;
+  init(ctrl)  := idle;
+
+  next(train) := case
+    train = far         : {far, approaching};
+    train = approaching : {approaching, in_crossing};
+    train = in_crossing : {in_crossing, passed};
+    TRUE                : train;
+  esac;
+
+  next(ctrl) := case
+    ctrl = idle        & train = approaching : {idle, closing_req};
+    ctrl = closing_req & train = passed      : {closing_req, opening_req};
+    ctrl = opening_req & gate = open         : {opening_req, idle};
+    TRUE                                     : ctrl;
+  esac;
+
+  next(gate) := case
+    gate = open     & ctrl = closing_req : {open, lowering};
+    gate = lowering & ctrl = closing_req : {lowering, closed};
+    gate = lowering & ctrl = opening_req : {lowering, raising};
+    gate = closed   & ctrl = opening_req : {closed, raising};
+    gate = raising                       : {raising, open};
+    TRUE                                 : gate;
+  esac;
+
+DEFINE
+  train_in_crossing := (train = in_crossing);
+  gate_is_down      := (gate = closed);
+  unsafe_state      := (train = in_crossing & gate != closed);

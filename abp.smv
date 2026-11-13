@@ -1,0 +1,29 @@
+MODULE main
+VAR
+  phase : {send, data_tx, data_lost, data_corrupt, ack_tx, ack_lost, ack_ok};
+  sb    : 0..1;
+  rb    : 0..1;
+
+INIT
+  phase = send & sb = 0 & rb = 0
+
+DEFINE
+  packet_lost  := (phase = data_lost);
+  bit_error    := (phase = data_corrupt);
+  ack_received := (phase = ack_ok);
+
+TRANS
+
+    (phase = send & next(phase) = data_tx & next(sb) = sb & next(rb) = rb)
+
+  | (phase = data_tx & (next(phase) = data_lost | next(phase) = data_corrupt) & next(sb) = sb & next(rb) = rb)
+
+  | (phase = data_tx & sb = rb & next(phase) = ack_tx & next(sb) = sb & next(rb) = 1 - rb)
+
+  | (phase = data_tx & sb != rb & next(phase) = ack_tx & next(sb) = sb & next(rb) = rb)
+
+  | ((phase = data_lost | phase = data_corrupt | phase = ack_lost) & next(phase) = send & next(sb) = sb & next(rb) = rb)
+
+  | (phase = ack_tx & (next(phase) = ack_lost | next(phase) = ack_ok) & next(sb) = sb & next(rb) = rb)
+
+  | (phase = ack_ok & next(phase) = send & next(sb) = 1 - sb & next(rb) = rb)
