@@ -15,10 +15,6 @@ Five concurrent and reactive systems modeled as finite transition systems. Each 
 | Railway crossing controller | `models/railway.json` | `models/railway.smv` | `train_in_crossing`, `gate_is_down`, `unsafe_state` |
 | Three-floor elevator controller | `models/elevator.json` | `models/elevator.smv` | `moving`, `doors_open`, `stalled` |
 
-`gen_json.py` builds the JSON files by exploring each system's transition function from its initial state. The `.smv` files are written separately and do not depend on it.
-
-    python3 gen_json.py models
-
 ## Model sizes
 
 | System | States | Transitions |
